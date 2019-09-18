@@ -32,7 +32,14 @@ class ServerController extends Controller
     public function update($id, Request $request)
     {
         $server = Server::findofFail($id);
+        $server = Server::update($request->all());
+
+        return response()->json($server,200);
     }
 
-    public function delete($id){}
+    public function delete($id){
+        Server::findorFail($id)->delete();
+
+        return response('Record Deleted Successfully', 200);
+    }
 }
